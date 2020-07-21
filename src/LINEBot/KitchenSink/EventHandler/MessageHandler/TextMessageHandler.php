@@ -36,6 +36,7 @@ use LINE\LINEBot\Event\MessageEvent\TextMessage;
 use LINE\LINEBot\KitchenSink\EventHandler;
 use LINE\LINEBot\KitchenSink\EventHandler\MessageHandler\Flex\FlexSampleRestaurant;
 use LINE\LINEBot\KitchenSink\EventHandler\MessageHandler\Flex\FlexSampleShopping;
+use LINE\LINEBot\KitchenSink\EventHandler\MessageHandler\Flex\SendFlexTest;
 use LINE\LINEBot\KitchenSink\EventHandler\MessageHandler\Util\UrlBuilder;
 use LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder;
 use LINE\LINEBot\MessageBuilder\Imagemap\VideoBuilder;
@@ -179,7 +180,7 @@ class TextMessageHandler implements EventHandler
                 );
                 $this->bot->replyMessage($replyToken, $imagemapMessageBuilder);
                 break;
-            case 'imagemapVideo':
+            case 'imagemapvideo':
                 $richMessageUrl = UrlBuilder::buildUrl($this->req, ['static', 'rich']);
                 $imagemapMessageBuilder = new ImagemapMessageBuilder(
                     $richMessageUrl,
@@ -213,10 +214,14 @@ class TextMessageHandler implements EventHandler
                 );
                 $this->bot->replyMessage($replyToken, $imagemapMessageBuilder);
                 break;
+            case 'flex':
+                $flexMessageaaa = SendFlexTest::testReplyFlex();
+                $this->bot->replyMessage($replyToken, $flexMessageaaa);
+                break;
             case 'restaurant':
                 $flexMessageBuilder = FlexSampleRestaurant::get();
                 $this->bot->replyMessage($replyToken, $flexMessageBuilder);
-                break;
+                break;    
             case 'shopping':
                 $flexMessageBuilder = FlexSampleShopping::get();
                 $this->bot->replyMessage($replyToken, $flexMessageBuilder);
